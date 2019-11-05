@@ -1,0 +1,87 @@
+li{
+    list-style-type: none;
+    margin: 2vw 0;
+    
+    font-size: 3vh;
+  }
+  
+  a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat';
+    padding: 2vw;
+  }
+  
+  nav{
+    width: 100vw;
+    background-color: #5d57ff;
+  }
+  
+  ul{
+    display: block;
+    margin: 0;
+    padding: 0;
+    
+    display: flex;  
+  }
+  
+  body{
+    margin: 0;
+    font-family: 'Montserrat'
+  }
+  
+  button{
+    display: none;
+  }
+  
+  a:hover{
+    color: #5d57ff;
+    background-color: white;
+  }
+  
+  @media only screen and (max-width: 500px) {
+    ul{
+      flex-direction: column;
+    }
+    
+    a{
+      display: block;
+    }
+    
+    li{
+      margin: 0;
+    }
+    
+    button{
+      display: block;
+      
+      padding: 2vw;
+      font-size: 3vh;
+      background-color: #5d57ff;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: white;
+      
+      align-self: flex-start;
+    }
+    
+  }
+  
+  .about{
+    font-family: 'Montserrat';
+    color: #5d57ff;
+    
+  
+  }
+  .make{
+    font-family: 'Montserrat';
+    background-color: #5d57ff;
+    color: white;
+  }
+
+  .make:hover{
+        font-family: 'Montserrat';
+      background-color: white;
+      color: #5d57ff;
+  }
