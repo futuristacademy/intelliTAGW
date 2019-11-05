@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>QR Scanner</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+
+  <script type="text/javascript" src="navbar.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<script src="https://aframe.io/releases/0.9.0/aframe.min.js">
+</script>
+<script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js">
+</script>
+<script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js">
+</script>
+
+<body style='margin : 0px; overflow: hidden;'>
+  <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+  <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+    <a-plane rotation="-90 0 0" opacity="0.0">
+      <a-text id="tag" value="data" z-offset="1"></a-text>
+    </a-plane>
+    <a-marker-camera preset='hiro'></a-marker-camera>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <video width="0" height="0" id="preview"></video>
+
+  <script>
+    let scanner = new Instascan.Scanner(
+      {
+        video: document.getElementById('preview')
+      }
+    );
+    scanner.addListener('scan', function (content) {
+      console.log(content)
+      var url_string = content;
+      var url = new URL(url_string);
+      var name = url.searchParams.get("name");
+      var organization = url.searchParams.get("organization");
+      var interests = url.searchParams.get("interests");
+      var jobstatus = url.searchParams.get("jobstatus");
+      var data = "Name: " + name + "\n" + "Organization: " + organization + "\n" + "Interests: " + interests + "\n" + "JobStatus: " + jobstatus;
+      document.querySelector("#tag").setAttribute("value", data);
+    });
+    Instascan.Camera.getCameras().then(cameras => {
+      if (cameras.length > 0) {
+        scanner.start(cameras[0]);
+      } else {
+        console.error("No camera was found, please try again");
+      }
+    });
+  </script>
+
+
+</body>
+
+</html>
