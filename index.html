@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+
+<script type="text/javascript" src="navbar.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/main.css">
+<script>
+  $(document).ready(function(){
+  
+  $("button").click(function(){
+    if($("button").text() == "☰"){
+      $("button").text("🞬");
+    }else{
+      $("button").text("☰");
+    }
+    
+    $("li").toggle("fast");
+  });  
+});
+</script>
+
+</head>
+
+<body>
+  <title>intelliTAG</title>
+  <nav>
+    <ul>
+      <button>🞬</button>
+      <li>
+        <a> intelliTAG </a>
+      </li>
+      <li>
+        <!-- link one -->
+        <a href="index.html"> Make </a>
+      </li>
+      <li>
+        <!-- link two -->
+        <a href="qr.html"> Scan </a>
+      </li>
+    </ul>
+  </nav>
+  <input type = "text" id = "Name" placeholder="Enter Name">
+  <input type = "text" id = "Organization" placeholder="Enter Organization">
+  <input type = "text" id = "Interests" placeholder="Enter Interest">
+  <input type = "text" id = "JobStatus" placeholder="Enter JobStatus">
+  <input type="button" value="Make QR Code" onclick="generateQRCode()">
+
+  <div>
+    <canvas id="qr">
+
+    </canvas>
+  </div>
+  <script src="qrious.min.js"></script>
+  <script>
+    function generateQRCode(){
+      var name = document.getElementById("Name").value
+      var organization = document.getElementById("Organization").value
+      var interests = document.getElementById("Interests").value
+      var jobstatus = document.getElementById("JobStatus").value
+      var data = "https://rohanshiva.github.io/ar/?name=" + name + "&organization=" + organization + "&interests=" + interests + "&jobstatus=" + jobstatus
+      var qr = new QRious({
+        element:document.getElementById("qr"), value:data, 
+        size:"250", background:"white", foreground:"#5d57ff", 
+        padding:"20", level:"L", foregroundAlpha:"2.8"
+      })
+    }
+  </script>
+  
+
+  
+</body>
+
+</html>
